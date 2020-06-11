@@ -1,8 +1,8 @@
-%global bootstrap 0.34.0
+#global bootstrap 0.34.0
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 0.34.0
+Version: 0.35.0
 Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
@@ -44,6 +44,7 @@ Requires: gc-devel >= 7.6.0
 Requires: gmp-devel
 Requires: pcre-devel
 Requires: zlib-devel
+Requires: libxml2-devel
 Requires: libyaml-devel
 Requires: openssl-devel
 Requires: libevent-devel
@@ -140,6 +141,12 @@ export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
 
 
 %changelog
+* Wed Jun 10 2020 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.35.0-1
+- version 0.35.0
+
+* Sat May 09 2020 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.34.0-2
+- libxml2-devel added to requires
+
 * Tue Apr 07 2020 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.34.0-1
 - version 0.34.0
 
