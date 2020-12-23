@@ -1,4 +1,4 @@
-#global bootstrap 0.35.1
+%global bootstrap 0.35.1
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
@@ -12,7 +12,6 @@ Source0: https://github.com/crystal-lang/crystal/archive/%{version}/crystal-%{ve
 Source1: filter-requires.sh
 Source2: crystal-wrapper.sh
 %if 0%{?bootstrap:1}
-Source3: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-i686.tar.gz
 Source4: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-x86_64.tar.gz
 %endif
 
@@ -29,7 +28,11 @@ BuildRequires: gc-devel >= 7.6.0
 %if 0%{?fedora} < 32
 BuildRequires: llvm7.0-devel
 %else
+%if 0%{?fedora} >= 33
+BuildRequires: llvm10-devel
+%else
 BuildRequires: llvm-devel >= 3.8
+%endif
 %endif
 BuildRequires: findutils
 BuildRequires: pcre-devel
@@ -78,10 +81,8 @@ BuildArch: noarch
 %autosetup
 
 %if 0%{?bootstrap:1}
-%if %{_arch} == x86_64
+%ifarch x86_64
 %{__tar} -xzf %{SOURCE4} -C .
-%else
-%{__tar} -xzf %{SOURCE3} -C .
 %endif
 %endif
 
