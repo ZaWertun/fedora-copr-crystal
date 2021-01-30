@@ -5,7 +5,7 @@ Version: 0.36.0
 Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
-#global bootstrap %{version}
+%global bootstrap %{version}
 
 License: ASL 2.0
 URL:     https://crystal-lang.org
@@ -26,14 +26,15 @@ BuildRequires: file
 BuildRequires: make
 BuildRequires: gcc-c++
 BuildRequires: gc-devel >= 7.6.0
+%if 0%{?fedora}
 %if 0%{?fedora} < 32
 BuildRequires: llvm7.0-devel
-%else
-%if 0%{?fedora} >= 33
+%endif
+%if 0%{?fedora} == 33
 BuildRequires: llvm10-devel
+%endif
 %else
 BuildRequires: llvm-devel >= 3.8
-%endif
 %endif
 BuildRequires: findutils
 BuildRequires: pcre-devel
@@ -94,7 +95,6 @@ bootstrap="$(readlink -f ./crystal-%{bootstrap}*)"
 binarydir=$(find "$bootstrap" -name crystal -type f -executable -exec sh -c "file -i '{}' |grep charset=binary >/dev/null" \; -print0 |xargs -0 dirname)
 
 PATH="$binarydir:$PATH"; export PATH
-CRYSTAL_PATH="$bootstrap/src"; export CRYSTAL_PATH
 %endif
 
 export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
