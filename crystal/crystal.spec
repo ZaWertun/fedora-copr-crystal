@@ -1,7 +1,7 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 0.36.0
+Version: 0.36.1
 Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
@@ -30,7 +30,10 @@ BuildRequires: gc-devel >= 7.6.0
 %if 0%{?fedora} < 32
 BuildRequires: llvm7.0-devel
 %endif
-%if 0%{?fedora} == 33
+%if 0%{?fedora} == 32
+BuildRequires: llvm-devel >= 3.8
+%endif
+%if 0%{?fedora} >= 33
 BuildRequires: llvm10-devel
 %endif
 %else
@@ -143,6 +146,9 @@ export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
 
 
 %changelog
+* Tue Feb 02 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.36.1-1
+- version 0.36.1
+
 * Tue Jan 26 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.36.0-1
 - version 0.36.0
 
