@@ -1,7 +1,7 @@
-%define  molinillo_version 0.1.0
+%define  molinillo_version 0.2.0
 
 Name:    shards
-Version: 0.13.0
+Version: 0.14.0
 Release: 1%{?dist}
 Summary: Dependency manager for the Crystal language
 
@@ -18,6 +18,7 @@ BuildRequires: gcc
 BuildRequires: gzip
 BuildRequires: make
 BuildRequires: crystal
+BuildRequires: asciidoctor
 
 Requires: git
 Requires: crystal
@@ -33,11 +34,13 @@ tar -xf %{SOURCE1} --strip-components=1 -C lib/molinillo
 
 
 %build
+# Fix for error: Failed to load AsciiDoc document - invalid value for Integer(): ""
+sed -i "s|source_date_epoch := .*|source_date_epoch := $(date +%s)|" docs.mk
 %__make clean bin/shards
 
 
 %install
-%make_install PREFIX=%{_prefix}
+%make_install VERBOSE=1 PREFIX=%{_prefix}
 gzip -9 %{buildroot}%{_mandir}/man1/shards.1
 gzip -9 %{buildroot}%{_mandir}/man5/shard.yml.5
 
@@ -50,6 +53,9 @@ gzip -9 %{buildroot}%{_mandir}/man5/shard.yml.5
 
 
 %changelog
+* Wed Feb 24 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.14.0-1
+- version 0.14.0, crystal-molinillo-0.2.0
+
 * Sun Jan 24 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.13.0-1
 - version 0.13.0
 
