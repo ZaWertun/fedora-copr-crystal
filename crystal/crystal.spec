@@ -1,7 +1,7 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 0.36.1
+Version: 1.0.0
 Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
@@ -146,6 +146,9 @@ export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
 
 
 %changelog
+* Mon Mar 22 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.0.0-1
+- version 1.0.0
+
 * Tue Feb 02 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.36.1-1
 - version 0.36.1
 
