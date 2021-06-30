@@ -1,7 +1,7 @@
 %define  molinillo_version 0.2.0
 
 Name:    shards
-Version: 0.14.1
+Version: 0.15.0
 Release: 1%{?dist}
 Summary: Dependency manager for the Crystal language
 
@@ -51,6 +51,9 @@ gzip -9 %{buildroot}%{_mandir}/man5/shard.yml.5
 
 
 %changelog
+* Wed Jun 30 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.15.0-1
+- version 0.15.0
+
 * Thu Mar 11 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.14.1-1
 - version 0.14.1
 

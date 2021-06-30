@@ -2,7 +2,7 @@
 
 Name:    crystal
 Version: 1.0.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The Crystal Programming Language
 
 %global bootstrap %{version}
@@ -146,6 +146,9 @@ export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
 
 
 %changelog
+* Wed Jun 30 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.0.0-2
+- rebuild
+
 * Mon Mar 22 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.0.0-1
 - version 1.0.0
 
