@@ -2,7 +2,7 @@
 
 Name:    crystal
 Version: 1.2.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The Crystal Programming Language
 
 %global bootstrap 1.1.1
@@ -100,8 +100,12 @@ binarydir=$(find "$bootstrap" -name crystal -type f -executable -exec sh -c "fil
 PATH="$binarydir:$PATH"; export PATH
 %endif
 
+export release=1
+export verbose=1
+export threads=%{_smp_build_ncpus}
+export CXXFLAGS="%optflags"
 export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
-%{__make} progress=true %{?_smp_mflags}
+%{__make}
 %{__make} docs
 
 
@@ -146,6 +150,9 @@ export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
 
 
 %changelog
+* Thu Oct 14 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.2.0-2
+- make release with verbose output
+
 * Wed Oct 13 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.2.0-1
 - version 1.2.0
 
