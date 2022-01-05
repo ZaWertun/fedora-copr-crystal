@@ -109,6 +109,7 @@ PATH="$binarydir:$PATH"; export PATH
 export release=1
 export verbose=1
 export threads=%{_smp_build_ncpus}
+export interpreter=1
 export CXXFLAGS="%optflags"
 export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
 %{__make}
