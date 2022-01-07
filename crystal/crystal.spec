@@ -1,11 +1,11 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.2.2
-Release: 2%{?dist}
+Version: 1.3.0
+Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
-%global bootstrap %{version}
+%global bootstrap 1.2.2
 
 License: ASL 2.0
 URL:     https://crystal-lang.org
@@ -47,6 +47,7 @@ BuildRequires: llvm-devel >= 3.8
 %endif
 BuildRequires: findutils
 BuildRequires: pcre-devel
+BuildRequires: libffi-devel
 BuildRequires: libyaml-devel
 BuildRequires: libevent-devel
 BuildRequires: pkgconfig(bash-completion)
@@ -58,6 +59,7 @@ Requires: gc-devel >= 7.6.0
 Requires: gmp-devel
 Requires: pcre-devel
 Requires: zlib-devel
+Requires: libffi-devel
 Requires: libxml2-devel
 Requires: libyaml-devel
 Requires: openssl-devel
@@ -132,6 +134,8 @@ export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
 %{__mkdir} -p %{buildroot}%{_datadir}/crystal
 %{__cp} -r src %{buildroot}%{_datadir}/crystal
 %{__cp} -r docs %{buildroot}%{_datadir}/crystal
+
+%{__rm} -v samples/.gitignore
 %{__cp} -r samples %{buildroot}%{_datadir}/crystal
 
 
@@ -157,6 +161,9 @@ export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
 
 
 %changelog
+* Thu Jan 06 2022 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.3.0-1
+- version 1.3.0
+
 * Thu Nov 25 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.2.2-2
 - use LLVM-13 on Fedora 35
 
