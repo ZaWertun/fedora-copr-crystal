@@ -114,29 +114,29 @@ export threads=%{_smp_build_ncpus}
 export interpreter=1
 export CXXFLAGS="%optflags"
 export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
-%{__make}
-%{__make} docs
+make
+make docs
 
 
 %install
-%{__install} -D -m 755 %{SOURCE2} %{buildroot}%{_bindir}/crystal
-%{__sed} -i 's|CRYSTAL_LIBRARY_PATH=/usr/lib:/usr/local/lib|CRYSTAL_LIBRARY_PATH=%{_libdir}:/usr/local/%{_lib}|' \
+install -D -m 755 %{SOURCE2} %{buildroot}%{_bindir}/crystal
+sed -i 's|CRYSTAL_LIBRARY_PATH=/usr/lib:/usr/local/lib|CRYSTAL_LIBRARY_PATH=%{_libdir}:/usr/local/%{_lib}|' \
     %{buildroot}%{_bindir}/crystal
 
-%{__install} -D -m 755 .build/crystal %{buildroot}%{_prefix}/lib/crystal/bin/crystal
+install -D -m 755 .build/crystal %{buildroot}%{_prefix}/lib/crystal/bin/crystal
 
-%{__gzip} -9 man/crystal.1
-%{__install} -D -m 644 man/crystal.1.gz %{buildroot}%{_mandir}/man1/crystal.1.gz
+gzip -9 man/crystal.1
+install -D -m 644 man/crystal.1.gz %{buildroot}%{_mandir}/man1/crystal.1.gz
 
-%{__install} -D -m 644 etc/completion.bash %{buildroot}%{bash_completionsdir}/crystal
-%{__install} -D -m 644 etc/completion.zsh %{buildroot}%{_datadir}/zsh/site-functions/_crystal
+install -D -m 644 etc/completion.bash %{buildroot}%{bash_completionsdir}/crystal
+install -D -m 644 etc/completion.zsh %{buildroot}%{_datadir}/zsh/site-functions/_crystal
 
-%{__mkdir} -p %{buildroot}%{_datadir}/crystal
-%{__cp} -r src %{buildroot}%{_datadir}/crystal
-%{__cp} -r docs %{buildroot}%{_datadir}/crystal
+mkdir -p %{buildroot}%{_datadir}/crystal
+cp -r src %{buildroot}%{_datadir}/crystal
+cp -r docs %{buildroot}%{_datadir}/crystal
 
-%{__rm} -v samples/.gitignore
-%{__cp} -r samples %{buildroot}%{_datadir}/crystal
+rm -v samples/.gitignore
+cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %files
