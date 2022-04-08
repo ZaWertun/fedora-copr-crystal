@@ -2,7 +2,7 @@
 
 Name:    crystal
 Version: 1.4.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The Crystal Programming Language
 
 %global bootstrap %{version}
@@ -162,6 +162,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Fri Apr 08 2022 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.4.0-2
+- added crystal-1.4.0-fix-crystal-loader.patch
+
 * Fri Apr 08 2022 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.4.0-1
 - version 1.4.0
 
