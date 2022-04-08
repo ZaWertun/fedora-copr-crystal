@@ -1,8 +1,8 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.3.2
-Release: 2%{?dist}
+Version: 1.4.0
+Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
 %global bootstrap %{version}
@@ -158,6 +158,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Fri Apr 08 2022 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.4.0-1
+- version 1.4.0
+
 * Fri Mar 25 2022 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.3.2-2
 - BR: llvm-devel for Fedora > 35
 
