@@ -16,6 +16,10 @@ Source2: crystal-wrapper.sh
 Source4: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-x86_64.tar.gz
 %endif
 
+# Fix issue when interpreter can't find versioned libdl.so and librt.so on Fedora
+#  (package glibc-devel doesn't contain libdl.so & librt.so)
+Patch0:  crystal-1.4.0-fix-crystal-loader.patch
+
 %define    _use_internal_dependency_generator 0
 %define    __find_requires %{SOURCE1}
 
@@ -88,7 +92,7 @@ BuildArch: noarch
 
 
 %prep
-%autosetup
+%autosetup -p1
 
 %if 0%{?bootstrap:1}
 %ifarch x86_64
