@@ -2,7 +2,7 @@
 
 Name:    crystal
 Version: 1.3.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The Crystal Programming Language
 
 %global bootstrap %{version}
@@ -30,16 +30,13 @@ BuildRequires: gc-devel >= 7.6.0
 %if 0%{?fedora} < 32
 BuildRequires: llvm7.0-devel
 %endif
-# Use LLVM-10 on Fedora 32
 %if 0%{?fedora} == 32
 BuildRequires: llvm-devel >= 3.8
 %endif
-# Use LLVM-10 on Fedora 33, 34
 %if 0%{?fedora} >= 33 && 0%{?fedora} <= 34
 BuildRequires: llvm10-devel
 %endif
-# Use LLVM-13 on Fedora 35
-%if 0%{?fedora} == 35
+%if 0%{?fedora} >= 35
 BuildRequires: llvm-devel
 %endif
 %else
@@ -161,6 +158,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Fri Mar 25 2022 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.3.2-2
+- BR: llvm-devel for Fedora > 35
+
 * Wed Jan 19 2022 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.3.2-1
 - version 1.3.2
 
