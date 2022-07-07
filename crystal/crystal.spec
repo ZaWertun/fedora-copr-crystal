@@ -1,11 +1,11 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.4.1
+Version: 1.5.0
 Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
-%global bootstrap %{version}
+#global bootstrap %{version}
 
 License: ASL 2.0
 URL:     https://crystal-lang.org
@@ -16,10 +16,6 @@ Source2: crystal-wrapper.sh
 Source4: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-x86_64.tar.gz
 %endif
 
-# Fix issue when interpreter can't find versioned libdl.so and librt.so on Fedora
-#  (package glibc-devel doesn't contain libdl.so & librt.so)
-Patch0:  crystal-1.4.0-fix-crystal-loader.patch
-
 %define    _use_internal_dependency_generator 0
 %define    __find_requires %{SOURCE1}
 
@@ -28,6 +24,9 @@ BuildRequires: tar
 BuildRequires: git
 BuildRequires: file
 BuildRequires: make
+%if !0%{?bootstrap:1}
+BuildRequires: crystal < %{version}
+%endif
 BuildRequires: gcc-c++
 BuildRequires: gc-devel >= 7.6.0
 %if 0%{?fedora}
@@ -162,6 +161,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Thu Jul 07 2022 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.5.0-1
+- version 1.5.0
+
 * Sat Apr 23 2022 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.4.1-1
 - version 1.4.1
 
