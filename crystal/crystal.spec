@@ -1,11 +1,11 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.6.0
+Version: 1.6.2
 Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
-#global bootstrap #{version}
+%global bootstrap %{version}
 
 License: ASL 2.0
 URL:     https://crystal-lang.org
@@ -39,7 +39,9 @@ BuildRequires: llvm-devel >= 3.8
 %if 0%{?fedora} >= 33 && 0%{?fedora} <= 34
 BuildRequires: llvm10-devel
 %endif
-%if 0%{?fedora} >= 35
+%if 0%{?fedora} >= 37
+BuildRequires: llvm14-devel
+%else
 BuildRequires: llvm-devel
 %endif
 %else
@@ -161,6 +163,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Sat Nov 05 2022 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.6.2-1
+- Version 1.6.2
+
 * Thu Oct 06 2022 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.6.0-1
 - version 1.6.0
 
