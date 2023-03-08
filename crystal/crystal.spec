@@ -1,7 +1,7 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.7.2
+Version: 1.7.3
 Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
@@ -165,6 +165,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Wed Mar 08 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.7.3-1
+- version 1.7.3
+
 * Tue Jan 24 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.7.2-1
 - new version
 
