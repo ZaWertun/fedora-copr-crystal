@@ -1,7 +1,7 @@
 %define  molinillo_version 0.2.0
 
 Name:    shards
-Version: 0.17.2
+Version: 0.17.3
 Release: 1%{?dist}
 Summary: Dependency manager for the Crystal language
 
@@ -50,6 +50,9 @@ export release=1
 
 
 %changelog
+* Fri Apr 14 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.17.3-1
+- version 0.17.3
+
 * Tue Jan 10 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.17.2-1
 - version 0.17.2
 
