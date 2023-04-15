@@ -1,7 +1,7 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.7.3
+Version: 1.8.0
 Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
@@ -48,7 +48,6 @@ BuildRequires: llvm-devel
 BuildRequires: llvm-devel >= 3.8
 %endif
 BuildRequires: findutils
-BuildRequires: pcre-devel
 BuildRequires: pcre2-devel
 BuildRequires: libffi-devel
 BuildRequires: libyaml-devel
@@ -60,7 +59,6 @@ BuildRequires: crystal
 
 Requires: gc-devel >= 7.6.0
 Requires: gmp-devel
-Requires: pcre-devel
 Requires: pcre2-devel
 Requires: zlib-devel
 Requires: libffi-devel
@@ -165,6 +163,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Sat Apr 15 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.8.0-1
+- version 1.8.0
+
 * Wed Mar 08 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.7.3-1
 - version 1.7.3
 
