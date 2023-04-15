@@ -2,7 +2,7 @@
 
 Name:    crystal
 Version: 1.8.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The Crystal Programming Language
 
 #global bootstrap %{version}
@@ -163,6 +163,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Sat Apr 15 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.8.0-2
+- rebuild
+
 * Sat Apr 15 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.8.0-1
 - version 1.8.0
 
