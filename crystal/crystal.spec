@@ -54,7 +54,7 @@ BuildRequires: libyaml-devel
 BuildRequires: libevent-devel
 BuildRequires: pkgconfig(bash-completion)
 %if ! 0%{?bootstrap:1}
-BuildRequires: crystal
+BuildRequires: crystal%{?_isa} < %{version}-%{release}
 %endif
 
 Requires: gc-devel >= 7.6.0
