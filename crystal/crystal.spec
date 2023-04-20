@@ -1,8 +1,8 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.8.0
-Release: 2%{?dist}
+Version: 1.8.1
+Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
 #global bootstrap %{version}
@@ -66,6 +66,13 @@ Requires: libxml2-devel
 Requires: libyaml-devel
 Requires: openssl-devel
 Requires: libevent-devel
+
+# For `crystal --static`
+Recommends: pcre2-static
+Recommends: glibc-static
+#TODO:
+Recommends: gc-static
+Recommends: libevent-static
 
 %description
 Crystal is a programming language with the following goals:
@@ -163,6 +170,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Thu Apr 20 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.8.1-1
+- version 1.8.1
+
 * Sat Apr 15 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.8.0-2
 - rebuild
 
