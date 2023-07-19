@@ -1,23 +1,19 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.8.2
-Release: 2%{?dist}
+Version: 1.9.1
+Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
-#global bootstrap %{version}
+%global bootstrap %{version}
 
 License: ASL 2.0
 URL:     https://crystal-lang.org
 Source0: https://github.com/crystal-lang/crystal/archive/%{version}/crystal-%{version}.tar.gz
-Source1: filter-requires.sh
 Source2: crystal-wrapper.sh
 %if 0%{?bootstrap:1}
 Source4: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-x86_64.tar.gz
 %endif
-
-%define    _use_internal_dependency_generator 0
-%define    __find_requires %{SOURCE1}
 
 BuildRequires: xz
 BuildRequires: tar
@@ -70,13 +66,6 @@ Requires: libxml2-devel
 Requires: libyaml-devel
 Requires: openssl-devel
 Requires: libevent-devel
-
-# For `crystal --static`
-Recommends: pcre2-static
-Recommends: glibc-static
-#TODO:
-Recommends: gc-static
-Recommends: libevent-static
 
 %description
 Crystal is a programming language with the following goals:
@@ -174,6 +163,12 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Tue Jul 18 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.9.1-1
+- version 1.9.1
+
+* Thu May 18 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.8.2-3
+- cleanup
+
 * Wed May 17 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.8.2-2
 - build with LLVM-15 for Fedora 37 & 38
 
