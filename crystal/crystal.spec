@@ -2,7 +2,7 @@
 
 Name:    crystal
 Version: 1.10.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The Crystal Programming Language
 
 #global bootstrap %{version}
@@ -39,8 +39,16 @@ BuildRequires: llvm10-devel
 # llvm-15
 BuildRequires: llvm-devel
 %endif
-%if 0%{?fedora} >= 38
-BuildRequires: llvm15-devel
+%if 0%{?fedora} == 38
+# llvm-16
+BuildRequires: llvm-devel
+%endif
+%if 0%{?fedora} == 39
+# llvm-17
+BuildRequires: llvm-devel
+%endif
+%if 0%{?fedora} > 39
+BuildRequires: llvm17-devel
 %else
 BuildRequires: llvm-devel
 %endif
@@ -163,6 +171,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Thu Nov 16 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.10.1-2
+- BR llvm-devel for Fedora 37, 38, 39
+
 * Fri Oct 13 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.10.1-1
 - version 1.10.1
 
