@@ -1,11 +1,11 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.10.1
-Release: 2%{?dist}
+Version: 1.11.0
+Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
-%global bootstrap %{version}
+#global bootstrap %{version}
 
 License: ASL 2.0
 URL:     https://crystal-lang.org
@@ -144,8 +144,6 @@ install -D -m 644 etc/completion.zsh %{buildroot}%{_datadir}/zsh/site-functions/
 mkdir -p %{buildroot}%{_datadir}/crystal
 cp -r src %{buildroot}%{_datadir}/crystal
 cp -r docs %{buildroot}%{_datadir}/crystal
-
-rm -v samples/.gitignore
 cp -r samples %{buildroot}%{_datadir}/crystal
 
 
@@ -171,6 +169,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Mon Jan 08 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.11.0-1
+- version 1.11.0
+
 * Thu Nov 16 2023 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.10.1-2
 - BR llvm-devel for Fedora 37, 38, 39
 
