@@ -5,7 +5,7 @@ Version: 1.11.2
 Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
-#global bootstrap %{version}
+%global bootstrap %{version}
 
 License: ASL 2.0
 URL:     https://crystal-lang.org
