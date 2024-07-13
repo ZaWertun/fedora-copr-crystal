@@ -1,11 +1,11 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.12.2
+Version: 1.13.1
 Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
-%global bootstrap 1.12.1
+%global bootstrap 1.13.1
 
 License: ASL 2.0
 URL:     https://crystal-lang.org
@@ -169,6 +169,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Sat Jul 13 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.13.1-1
+- version 1.13.1
+
 * Fri May 31 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.12.2-1
 - version 1.12.2
 
