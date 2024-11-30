@@ -1,8 +1,8 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.13.3
-Release: 1%{?dist}
+Version: 1.14.0
+Release: 2%{?dist}
 Summary: The Crystal Programming Language
 
 %global bootstrap %{version}
@@ -48,8 +48,7 @@ BuildRequires: llvm-devel
 BuildRequires: llvm-devel
 %endif
 %if 0%{?fedora} > 39
-BuildRequires: llvm17-devel
-%else
+# llvm-19
 BuildRequires: llvm-devel
 %endif
 %else
@@ -169,6 +168,12 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Sat Nov 30 2024 Renich Bon Ćirić <renich@woralelandia.com> - 1.14.0-2
+- LLVM 19 build for Fedora 40 and 41.
+
+* Wed Oct 09 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.14.0-1
+- version 1.14.0
+
 * Tue Oct 01 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.13.3-1
 - version 1.13.3
 
@@ -396,4 +401,3 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 * Fri Jun 15 2018 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.25.0-5
 - version 0.25.0
-
