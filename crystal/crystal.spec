@@ -2,7 +2,7 @@
 
 Name:    crystal
 Version: 1.15.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The Crystal Programming Language
 
 %global bootstrap 1.14.0
@@ -58,7 +58,6 @@ BuildRequires: findutils
 BuildRequires: pcre2-devel
 BuildRequires: libffi-devel
 BuildRequires: libyaml-devel
-BuildRequires: libevent-devel
 BuildRequires: pkgconfig(bash-completion)
 %if ! 0%{?bootstrap:1}
 BuildRequires: crystal%{?_isa} < %{version}-%{release}
@@ -72,7 +71,6 @@ Requires: libffi-devel
 Requires: libxml2-devel
 Requires: libyaml-devel
 Requires: openssl-devel
-Requires: libevent-devel
 
 %description
 Crystal is a programming language with the following goals:
@@ -168,6 +166,10 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Wed Jan 15 2025 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.15.0-2
+- libevent not needed anymore
+  see: https://crystal-lang.org/2025/01/09/1.15.0-released/#lifetime-eventloop
+
 * Wed Jan 15 2025 Renich Bon Ciric <renich@woralelandia.com> - 1.15.0-1
 - Update to v1.15.0.
 
