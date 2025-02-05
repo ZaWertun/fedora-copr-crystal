@@ -1,11 +1,11 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.15.0
-Release: 2%{?dist}
+Version: 1.15.1
+Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
-%global bootstrap 1.14.0
+%global bootstrap 1.15.1
 
 License: ASL 2.0
 URL:     https://crystal-lang.org
@@ -166,6 +166,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Wed Feb 05 2025 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.15.1-1
+- version 1.15.1
+
 * Wed Jan 15 2025 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.15.0-2
 - libevent not needed anymore
   see: https://crystal-lang.org/2025/01/09/1.15.0-released/#lifetime-eventloop
