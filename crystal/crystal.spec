@@ -1,11 +1,11 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.16.0
+Version: 1.16.2
 Release: 1%{?dist}
 Summary: The Crystal Programming Language
 
-%global bootstrap %version
+%global bootstrap 1.16.1
 
 License: ASL 2.0
 URL:     https://crystal-lang.org
@@ -25,35 +25,7 @@ BuildRequires: crystal < %{version}
 %endif
 BuildRequires: gcc-c++
 BuildRequires: gc-devel >= 7.6.0
-%if 0%{?fedora}
-%if 0%{?fedora} < 32
-BuildRequires: llvm7.0-devel
-%endif
-%if 0%{?fedora} == 32
 BuildRequires: llvm-devel >= 3.8
-%endif
-%if 0%{?fedora} >= 33 && 0%{?fedora} <= 34
-BuildRequires: llvm10-devel
-%endif
-%if 0%{?fedora} == 37
-# llvm-15
-BuildRequires: llvm-devel
-%endif
-%if 0%{?fedora} == 38
-# llvm-16
-BuildRequires: llvm-devel
-%endif
-%if 0%{?fedora} == 39
-# llvm-17
-BuildRequires: llvm-devel
-%endif
-%if 0%{?fedora} > 39
-# llvm-19
-BuildRequires: llvm-devel
-%endif
-%else
-BuildRequires: llvm-devel >= 3.8
-%endif
 BuildRequires: findutils
 BuildRequires: pcre2-devel
 BuildRequires: libffi-devel
@@ -166,6 +138,9 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 
 
 %changelog
+* Tue Apr 29 2025 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.16.2-1
+- version 1.16.2
+
 * Thu Apr 10 2025 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.16.0-1
 - version 1.16.0
 
