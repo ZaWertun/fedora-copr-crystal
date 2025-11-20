@@ -12,7 +12,8 @@ URL:     https://crystal-lang.org
 Source0: https://github.com/crystal-lang/crystal/archive/%{version}/crystal-%{version}.tar.gz
 Source2: crystal-wrapper.sh
 %if 0%{?bootstrap:1}
-Source4: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-%{_arch}.tar.gz
+Source4: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-x86_64.tar.gz
+Source5: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-aarch64.tar.gz
 %endif
 
 BuildRequires: xz
@@ -75,6 +76,8 @@ BuildArch: noarch
 %if 0%{?bootstrap:1}
 %ifarch x86_64
 %{__tar} -xzf %{SOURCE4} -C .
+%elifarch aarch64
+%{__tar} -xzf %{SOURCE5} -C .
 %endif
 %endif
 
