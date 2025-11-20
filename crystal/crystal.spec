@@ -76,7 +76,8 @@ BuildArch: noarch
 %if 0%{?bootstrap:1}
 %ifarch x86_64
 %{__tar} -xzf %{SOURCE4} -C .
-%elifarch aarch64
+%endif
+%ifarch aarch64
 %{__tar} -xzf %{SOURCE5} -C .
 %endif
 %endif
