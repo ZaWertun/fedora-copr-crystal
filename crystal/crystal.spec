@@ -24,26 +24,38 @@ BuildRequires: make
 %if !0%{?bootstrap:1}
 BuildRequires: crystal < %{version}
 %endif
-BuildRequires: gcc-c++
-BuildRequires: gc-devel >= 7.6.0
-BuildRequires: llvm-devel >= 3.8
 BuildRequires: findutils
-BuildRequires: pcre2-devel
+BuildRequires: gc-devel >= 7.6.0
+BuildRequires: gcc-c++
+BuildRequires: libedit-devel
+BuildRequires: libevent-devel
 BuildRequires: libffi-devel
+BuildRequires: libunwind-devel
+BuildRequires: libxml2-devel
 BuildRequires: libyaml-devel
+BuildRequires: llvm-devel >= 3.8
+BuildRequires: openssl-devel
+BuildRequires: pcre2-devel
 BuildRequires: pkgconfig(bash-completion)
 %if ! 0%{?bootstrap:1}
 BuildRequires: crystal%{?_isa} < %{version}-%{release}
 %endif
 
 Requires: gc-devel >= 7.6.0
+Requires: gcc
 Requires: gmp-devel
-Requires: pcre2-devel
-Requires: zlib-devel
+Requires: libedit-devel
+Requires: libevent-devel
 Requires: libffi-devel
+Requires: libunwind-devel
 Requires: libxml2-devel
 Requires: libyaml-devel
+Requires: llvm-devel
+Requires: make
 Requires: openssl-devel
+Requires: pcre2-devel
+Requires: pkgconf-pkg-config
+Requires: zlib-devel
 
 %description
 Crystal is a programming language with the following goals:
