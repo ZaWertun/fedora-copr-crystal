@@ -1,7 +1,7 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.18.2
+Version: 1.19.0
 Release: %autorelease
 Summary: The Crystal Programming Language
 
