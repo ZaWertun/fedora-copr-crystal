@@ -120,6 +120,12 @@ cp -r docs %{buildroot}%{_datadir}/crystal
 cp -r samples %{buildroot}%{_datadir}/crystal
 
 
+%pretrans
+if [ -d %{_datadir}/crystal/src/lib_c/aarch64-android ]; then
+    mv %{_datadir}/crystal/src/lib_c/aarch64-android %{_datadir}/crystal/src/lib_c/aarch64-android.rpmmoved
+fi
+
+
 %files
 %doc CHANGELOG.md README.md
 %license LICENSE
