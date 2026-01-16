@@ -2,7 +2,7 @@
 
 Name:    crystal
 Version: 1.19.0
-Release: %autorelease
+Release: 2%{?dist}
 Summary: The Crystal Programming Language
 
 %global bootstrap %{version}
