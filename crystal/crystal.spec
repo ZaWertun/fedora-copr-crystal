@@ -16,17 +16,15 @@ Source4: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/
 Source5: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-aarch64.tar.gz
 %endif
 
-BuildRequires: xz
-BuildRequires: tar
-BuildRequires: git
-BuildRequires: file
-BuildRequires: make
-%if !0%{?bootstrap:1}
-BuildRequires: crystal < %{version}
+%if ! 0%{?bootstrap:1}
+BuildRequires: crystal%{?_isa} < %{version}-%{release}
 %endif
+BuildRequires: file
 BuildRequires: findutils
 BuildRequires: gc-devel >= 7.6.0
 BuildRequires: gcc-c++
+BuildRequires: git
+BuildRequires: gmp-devel
 BuildRequires: libedit-devel
 BuildRequires: libevent-devel
 BuildRequires: libffi-devel
@@ -34,12 +32,12 @@ BuildRequires: libunwind-devel
 BuildRequires: libxml2-devel
 BuildRequires: libyaml-devel
 BuildRequires: llvm-devel >= 3.8
+BuildRequires: make
 BuildRequires: openssl-devel
 BuildRequires: pcre2-devel
 BuildRequires: pkgconfig(bash-completion)
-%if ! 0%{?bootstrap:1}
-BuildRequires: crystal%{?_isa} < %{version}-%{release}
-%endif
+BuildRequires: tar
+BuildRequires: xz
 
 Requires: gc-devel >= 7.6.0
 Requires: gcc
@@ -131,6 +129,8 @@ cp -r src %{buildroot}%{_datadir}/crystal
 cp -r docs %{buildroot}%{_datadir}/crystal
 cp -r samples %{buildroot}%{_datadir}/crystal
 
+%check
+# make test
 
 %pretrans
 if [ -d %{_datadir}/crystal/src/lib_c/aarch64-android ]; then
