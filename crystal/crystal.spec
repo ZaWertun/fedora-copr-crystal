@@ -21,7 +21,7 @@ BuildRequires: crystal%{?_isa} < %{version}-%{release}
 %endif
 BuildRequires: file
 BuildRequires: findutils
-BuildRequires: gc-devel >= 7.6.0
+BuildRequires: gc-devel >= 8.2.0
 BuildRequires: gcc-c++
 BuildRequires: git
 BuildRequires: gmp-devel
@@ -38,8 +38,9 @@ BuildRequires: pcre2-devel
 BuildRequires: pkgconfig(bash-completion)
 BuildRequires: tar
 BuildRequires: xz
+BuildRequires: zlib-devel
 
-Requires: gc-devel >= 7.6.0
+Requires: gc-devel >= 8.2.0
 Requires: gcc
 Requires: gmp-devel
 Requires: libedit-devel
@@ -130,7 +131,12 @@ cp -r docs %{buildroot}%{_datadir}/crystal
 cp -r samples %{buildroot}%{_datadir}/crystal
 
 %check
-# make test
+# Tests are currently failing on Rawhide due to a libxml2 symbol lookup error
+# (xmlParserVersion). We disable them for now to allow producing a working
+# binary for downstream builds.
+%if 0%{?fedora} < 45
+make test
+%endif
 
 %pretrans
 if [ -d %{_datadir}/crystal/src/lib_c/aarch64-android ]; then
