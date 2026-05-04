@@ -1,55 +1,76 @@
-%define  molinillo_version 0.2.0
+%define molinillo_version 0.2.0
 
 Name:    shards
 Version: 0.20.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Dependency manager for the Crystal language
 
 License: ASL 2.0
 URL:     https://github.com/crystal-lang/shards
 Source0: https://github.com/crystal-lang/shards/archive/v%{version}/shards-%{version}.tar.gz
 Source1: https://github.com/crystal-lang/crystal-molinillo/archive/v%{molinillo_version}/crystal-molinillo-%{molinillo_version}.tar.gz
-Source2: filter-requires.sh
 
-%define _use_internal_dependency_generator 0
-%define __find_requires %{SOURCE2}
-
+# --- BUILD DEPENDENCIES ---
 BuildRequires: gcc
-BuildRequires: gzip
 BuildRequires: make
+# Explicitly require the Crystal compiler
 BuildRequires: crystal
+# Required for man page generation
 BuildRequires: asciidoctor
+# Required for linking (shards uses YAML heavily)
+BuildRequires: libyaml-devel
+BuildRequires: pcre2-devel
+BuildRequires: openssl-devel
 
+# --- RUNTIME DEPENDENCIES ---
+# Shards delegates to git for cloning
 Requires: git
+# Shards often runs 'postinstall' hooks which execute crystal code
 Requires: crystal
 
 %description
-%{summary}.
-
+Dependency manager for the Crystal language.
 
 %prep
-%autosetup
+%autosetup -p1
+# Vendor molinillo manually as per upstream structure
 mkdir -p lib/molinillo
 tar -xf %{SOURCE1} --strip-components=1 -C lib/molinillo
 
-
 %build
+# Crystal build flags
 export release=1
-%__make bin/shards
+# Force static linking for portability or standard dynamic linking?
+# Standard dynamic linking is preferred for Fedora packages.
+# The Makefile usually handles 'release=1' by adding --release --no-debug
+make bin/shards
 
+# Generate Man Pages
+make docs
 
 %install
-%make_install VERBOSE=1 PREFIX=%{_prefix}
+# Install binary
+install -D -m 0755 bin/shards %{buildroot}%{_bindir}/shards
 
+# Install man pages
+install -D -m 0644 man/shards.1 %{buildroot}%{_mandir}/man1/shards.1
+install -D -m 0644 man/shard.yml.5 %{buildroot}%{_mandir}/man5/shard.yml.5
+
+%check
+make test
 
 %files
-%doc CHANGELOG.md LICENSE README.md SPEC.md
+%license LICENSE
+%doc CHANGELOG.md README.md
 %{_bindir}/shards
-%{_mandir}/man1/shards.1.gz
-%{_mandir}/man5/shard.yml.5.gz
-
+%{_mandir}/man1/shards.1*
+%{_mandir}/man5/shard.yml.5*
 
 %changelog
+* Sun May 03 2026 Rénich Bon Ćirić <renich@woralelandia.com> - 0.20.0-2
+- Fix dependencies and remove legacy filtering scripts
+- Simplified docs generation
+
 * Thu Apr 02 2026 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.20.0-1
 - version 0.20.0
 
@@ -115,5 +136,3 @@ export release=1
 
 * Thu Jun 14 2018 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.8.0-2
 - version 0.8.0
-
-
