@@ -1,7 +1,7 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.18.2
+Version: 1.20.1
 Release: %autorelease
 Summary: The Crystal Programming Language
 
@@ -130,6 +130,12 @@ mkdir -p %{buildroot}%{_datadir}/crystal
 cp -r src %{buildroot}%{_datadir}/crystal
 cp -r docs %{buildroot}%{_datadir}/crystal
 cp -r samples %{buildroot}%{_datadir}/crystal
+
+
+%pretrans
+if [ -d %{_datadir}/crystal/src/lib_c/aarch64-android ]; then
+    mv %{_datadir}/crystal/src/lib_c/aarch64-android %{_datadir}/crystal/src/lib_c/aarch64-android.rpmmoved
+fi
 
 
 %files
