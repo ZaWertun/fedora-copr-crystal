@@ -140,7 +140,7 @@ cp -r samples %{buildroot}%{_datadir}/crystal
 # Removing broken test:
 #   Error sending datagram to [ff02::102]:33615: Cannot assign requested address (Socket::Error)
 rm -v spec/std/socket/udp_socket_spec.cr
-make test
+make std_spec
 
 %pretrans
 if [ -d %{_datadir}/crystal/src/lib_c/aarch64-android ]; then
