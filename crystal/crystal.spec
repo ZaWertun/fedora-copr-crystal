@@ -26,7 +26,8 @@ BuildRequires: gc-devel >= 7.6.0
 %else
 BuildRequires: gc-devel >= 8.2.0
 %endif
-BuildRequires: gcc-c++
+BuildRequires: gcc
+BuildRequires: lld
 BuildRequires: git
 BuildRequires: gmp-devel
 BuildRequires: libedit-devel
@@ -46,6 +47,7 @@ BuildRequires: zlib-devel
 
 Requires: gc-devel >= 8.2.0
 Requires: gcc
+Requires: lld
 Requires: gmp-devel
 Requires: libedit-devel
 Requires: libevent-devel
@@ -135,9 +137,10 @@ cp -r docs %{buildroot}%{_datadir}/crystal
 cp -r samples %{buildroot}%{_datadir}/crystal
 
 %check
-# Tests are currently failing everywhere due to a libxml2 symbol lookup error
-# (xmlParserVersion).
-# make test
+# Removing broken test:
+#   Error sending datagram to [ff02::102]:33615: Cannot assign requested address (Socket::Error)
+rm -v spec/std/socket/udp_socket_spec.cr
+make test
 
 %pretrans
 if [ -d %{_datadir}/crystal/src/lib_c/aarch64-android ]; then
