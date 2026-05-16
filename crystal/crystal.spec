@@ -131,12 +131,9 @@ cp -r docs %{buildroot}%{_datadir}/crystal
 cp -r samples %{buildroot}%{_datadir}/crystal
 
 %check
-# Tests are currently failing on Rawhide due to a libxml2 symbol lookup error
-# (xmlParserVersion). We disable them for now to allow producing a working
-# binary for downstream builds.
-%if 0%{?fedora} < 45
-make test
-%endif
+# Tests are currently failing everywhere due to a libxml2 symbol lookup error
+# (xmlParserVersion).
+# make test
 
 %pretrans
 if [ -d %{_datadir}/crystal/src/lib_c/aarch64-android ]; then
