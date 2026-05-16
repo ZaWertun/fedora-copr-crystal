@@ -21,7 +21,11 @@ BuildRequires: crystal%{?_isa} < %{version}-%{release}
 %endif
 BuildRequires: file
 BuildRequires: findutils
+%if 0%{?rhel}
+BuildRequires: gc-devel >= 7.6.0
+%else
 BuildRequires: gc-devel >= 8.2.0
+%endif
 BuildRequires: gcc-c++
 BuildRequires: git
 BuildRequires: gmp-devel
