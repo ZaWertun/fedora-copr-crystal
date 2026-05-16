@@ -26,7 +26,7 @@ BuildRequires: gc-devel >= 7.6.0
 %else
 BuildRequires: gc-devel >= 8.2.0
 %endif
-BuildRequires: gcc
+BuildRequires: gcc-c++
 BuildRequires: lld
 BuildRequires: git
 BuildRequires: gmp-devel
