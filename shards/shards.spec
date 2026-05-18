@@ -2,7 +2,7 @@
 
 Name:    shards
 Version: 0.20.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Dependency manager for the Crystal language
 
 License: ASL 2.0
@@ -21,6 +21,8 @@ BuildRequires: asciidoctor
 BuildRequires: libyaml-devel
 BuildRequires: pcre2-devel
 BuildRequires: openssl-devel
+# For tests
+BuildRequires: hg git fossil
 
 # --- RUNTIME DEPENDENCIES ---
 # Shards delegates to git for cloning
@@ -67,6 +69,9 @@ make test
 %{_mandir}/man5/shard.yml.5*
 
 %changelog
+* Mon May 18 2026 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.20.0-3
+- BR: hg git fossil
+
 * Sun May 03 2026 Rénich Bon Ćirić <renich@woralelandia.com> - 0.20.0-2
 - Fix dependencies and remove legacy filtering scripts
 - Simplified docs generation
