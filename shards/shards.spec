@@ -2,7 +2,7 @@
 
 Name:    shards
 Version: 0.20.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Dependency manager for the Crystal language
 
 License: ASL 2.0
@@ -22,7 +22,7 @@ BuildRequires: libyaml-devel
 BuildRequires: pcre2-devel
 BuildRequires: openssl-devel
 # For tests
-BuildRequires: hg git fossil
+BuildRequires: hg git
 
 # --- RUNTIME DEPENDENCIES ---
 # Shards delegates to git for cloning
@@ -59,6 +59,8 @@ install -D -m 0644 man/shards.1 %{buildroot}%{_mandir}/man1/shards.1
 install -D -m 0644 man/shard.yml.5 %{buildroot}%{_mandir}/man5/shard.yml.5
 
 %check
+# Removing tests for fossil (missing in EPEL10)
+rm -v spec/unit/fossil_resolver_spec.cr
 make test
 
 %files
@@ -69,6 +71,9 @@ make test
 %{_mandir}/man5/shard.yml.5*
 
 %changelog
+* Mon May 18 2026 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.20.0-4
+- fix: fossil removed, missing in EPEL10
+
 * Mon May 18 2026 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.20.0-3
 - BR: hg git fossil
 
