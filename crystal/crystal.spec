@@ -1,7 +1,7 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.20.2
+Version: 1.20.3
 Release: %autorelease
 Summary: The Crystal Programming Language
 
@@ -45,22 +45,22 @@ BuildRequires: tar
 BuildRequires: xz
 BuildRequires: zlib-devel
 
-Requires: gc-devel >= 8.2.0
 Requires: gcc
 Requires: lld
-Requires: gmp-devel
-Requires: libedit-devel
+%if 0%{?rhel}
+Requires: gc-devel >= 7.6.0
+%else
+Requires: gc-devel >= 8.2.0
+%endif
 Requires: libevent-devel
-Requires: libffi-devel
-Requires: libunwind-devel
-Requires: libxml2-devel
-Requires: libyaml-devel
-Requires: llvm-devel
-Requires: make
-Requires: openssl-devel
 Requires: pcre2-devel
 Requires: pkgconf-pkg-config
-Requires: zlib-devel
+
+Recommends: gmp-devel
+Recommends: libxml2-devel
+Recommends: libyaml-devel
+Recommends: openssl-devel
+Recommends: zlib-devel
 
 %description
 Crystal is a programming language with the following goals:
