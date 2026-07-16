@@ -1,7 +1,7 @@
 %global bash_completionsdir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || echo '/etc/bash_completion.d')
 
 Name:    crystal
-Version: 1.20.3
+Version: 1.21.0
 Release: %autorelease
 Summary: The Crystal Programming Language
 
@@ -14,12 +14,6 @@ Source2: crystal-wrapper.sh
 %if 0%{?bootstrap:1}
 Source4: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-x86_64.tar.gz
 Source5: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-aarch64.tar.gz
-%endif
-
-%define openssl_version %(rpm -q --qf '%%{VERSION}' openssl-devel 2>/dev/null || echo 0)
-%if %[ "%{openssl_version}" >= "4.0.0" ]
-# Apply patch to support OpenSSL >= 4.0.0 (for example in Rawhide version 45)
-Patch0: crystal-1.20.3-support-openssl-4.0.0.patch
 %endif
 
 %if ! 0%{?bootstrap:1}
