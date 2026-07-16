@@ -44,6 +44,7 @@ BuildRequires: pkgconfig(bash-completion)
 BuildRequires: tar
 BuildRequires: xz
 BuildRequires: zlib-devel
+BuildRequires: hostname
 
 Requires: gcc
 Requires: lld
@@ -124,10 +125,6 @@ sed -i 's|CRYSTAL_LIBRARY_PATH=/usr/lib:/usr/local/lib|CRYSTAL_LIBRARY_PATH=%{_l
     %{buildroot}%{_bindir}/crystal
 
 install -D -m 755 .build/crystal %{buildroot}%{_prefix}/lib/crystal/bin/crystal
-
-gzip -9 man/crystal.1
-install -D -m 644 man/crystal.1.gz %{buildroot}%{_mandir}/man1/crystal.1.gz
-
 install -D -m 644 etc/completion.bash %{buildroot}%{bash_completionsdir}/crystal
 install -D -m 644 etc/completion.zsh %{buildroot}%{_datadir}/zsh/site-functions/_crystal
 
@@ -153,7 +150,6 @@ fi
 %license LICENSE
 %{_bindir}/crystal
 %{_prefix}/lib/crystal/bin/crystal
-%{_mandir}/man1/crystal.1.gz
 %{bash_completionsdir}/crystal
 %{_datadir}/zsh/site-functions/_crystal
 %{_datadir}/crystal/src
