@@ -1,0 +1,12 @@
+diff '--color=auto' -r -U3 crystal-1.21.0.orig/src/gc/boehm.cr crystal-1.21.0/src/gc/boehm.cr
+--- crystal-1.21.0.orig/src/gc/boehm.cr	2026-07-16 16:14:55.000000000 +0300
++++ crystal-1.21.0/src/gc/boehm.cr	2026-07-17 14:32:21.590140762 +0300
+@@ -121,7 +121,7 @@
+ 
+   fun push_all_eager = GC_push_all_eager(bottom : Void*, top : Void*)
+ 
+-  {% if !flag?(:without_mt) || flag?(:win32) || compare_versions(VERSION, "8.2.0") >= 0 %}
++  {% if (!flag?(:without_mt) || flag?(:win32)) && compare_versions(VERSION, "8.2.0") >= 0 %}
+     fun get_my_stackbottom = GC_get_my_stackbottom(sb : StackBase*) : ThreadHandle
+     fun set_stackbottom = GC_set_stackbottom(th : ThreadHandle, sb : StackBase*) : ThreadHandle
+   {% else %}
