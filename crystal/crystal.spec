@@ -16,9 +16,6 @@ Source4: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/
 Source5: https://github.com/crystal-lang/crystal/releases/download/%{bootstrap}/crystal-%{bootstrap}-1-linux-aarch64.tar.gz
 %endif
 
-# Fix build for EPEL-8 (ld.lld: error: undefined symbol: GC_get_my_stackbottom)
-Patch0: crystal-1.21.0-fix-build-with-old-gc.patch 
-
 %if ! 0%{?bootstrap:1}
 BuildRequires: crystal%{?_isa} < %{version}-%{release}
 %endif
