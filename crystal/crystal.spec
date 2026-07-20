@@ -115,6 +115,9 @@ export threads=%{_smp_build_ncpus}
 export interpreter=1
 export CXXFLAGS="%optflags"
 export LLVM_CONFIG=$(find %{_bindir} -name "llvm-config*" -print -quit)
+%if 0%{?rhel} == 8
+export COMPILER_FLAGS="-Dwithout_mt"
+%endif
 make
 make docs
 
